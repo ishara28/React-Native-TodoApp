@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { StyleSheet, Text, View, FlatList } from "react-native";
 import Header from "./components/Header";
 import TodoItem from "./components/TodoItem";
+import TodoForm from "./components/TodoForm";
 
 export default function App() {
   const [todos, setTodos] = useState([
@@ -16,11 +17,18 @@ export default function App() {
     });
   };
 
+  const addTodo = text => {
+    setTodos(prevTodos => {
+      return [{ text: text, key: Math.random }, ...prevTodos];
+    });
+  };
+
   return (
     <View style={styles.container}>
       <Header />
       <View style={styles.content}>
         {/* add todo form */}
+        <TodoForm addTodo={addTodo} />
         <View style={styles.list}>
           <FlatList
             data={todos}
