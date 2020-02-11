@@ -1,15 +1,38 @@
 import React, { useState } from "react";
+
 import {
   View,
   StyleSheet,
   TouchableOpacity,
   Text,
   TextInput,
-  Button
+  Button,
+  Alert
 } from "react-native";
 
 export default function TodoForm({ addTodo }) {
   const [text, settext] = useState("");
+
+  const handleSubmit = () => {
+    if (text.length > 3) {
+      addTodo(text);
+      settext("");
+    } else {
+      Alert.alert(
+        "OOPS!",
+        "Todo must be more than 3 char long!",
+        [
+          {
+            text: "Cancel",
+            onPress: () => console.log("Cancel Pressed"),
+            style: "cancel"
+          },
+          { text: "OK", onPress: () => console.log("OK Pressed") }
+        ],
+        { cancelable: false }
+      );
+    }
+  };
 
   return (
     <View>
@@ -22,7 +45,7 @@ export default function TodoForm({ addTodo }) {
       <Button
         title="Add Todo"
         color="coral"
-        onPress={(() => addTodo(text))}
+        onPress={() => handleSubmit(text)}
       />
     </View>
   );
