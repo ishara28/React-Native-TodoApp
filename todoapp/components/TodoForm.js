@@ -20,11 +20,14 @@ export default function TodoForm({ addTodo }) {
     } else {
       Alert.alert(
         "OOPS!",
-        "Todo must be more than 3 char long!",
+        "Add it more clear with more characters!",
         [
           {
-            text: "Cancel",
-            onPress: () => console.log("Cancel Pressed"),
+            text: "No Matters",
+            onPress: () => {
+              addTodo(text);
+              settext("");
+            },
             style: "cancel"
           },
           { text: "OK", onPress: () => console.log("OK Pressed") }
